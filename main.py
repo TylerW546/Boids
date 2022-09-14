@@ -1,3 +1,9 @@
+# -----------------------------------------------------------
+# Description: A Bird-oid (Boid) simulation with a settings panel built using pygame.
+# Date: September 27, 2021
+# Name: Tyler Weed
+# -----------------------------------------------------------
+
 import math
 import pygame
 from pygame.locals import *
@@ -14,9 +20,9 @@ red = (255,0,0)
 blue = (0, 0, 255)
 background = (30,30,40)
 
+# Pygame initialization
 pygame.font.init()
 myfont = pygame.font.SysFont('Times New Roman', 20)
-
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH + panelWidth, SCREEN_HEIGHT))
 
@@ -27,24 +33,29 @@ def main():
     from PositionFormatter import PositionFormatter
     from Environment import Environment
     
+    # Starting up classes
     Settings.startup()
     PositionFormatter.startup()
     Environment.startup()
     
     while (True):
+        # Process events
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 exit()
             Settings.handle_event(event)
-                
+        
+        # Clear screen
         screen.fill(background)
         
+        # Update Classes
         PositionFormatter.update() 
         Settings.update()
         Settings.writeInfo()
         Environment.update()
         
+        # Finish Loop
         pygame.display.update()
     
         time.sleep(.025)
