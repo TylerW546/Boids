@@ -4,7 +4,9 @@ from pygame.locals import *
 from main import *
 
 class Environment():
+   # Start with lines around the screen
    lines = [[0,0,SCREEN_WIDTH,0,background],[SCREEN_WIDTH,0,SCREEN_WIDTH,SCREEN_HEIGHT,background],[SCREEN_WIDTH,SCREEN_HEIGHT,0,SCREEN_HEIGHT,background],[0,SCREEN_HEIGHT,0,0,background]]
+   # If a lines is shorter than minLength, it will be deleted
    minLength = 1
    destroyBoxColor = (255,100,100,100)
    

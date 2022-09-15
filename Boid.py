@@ -97,33 +97,41 @@ class Boid():
       self.move()
       self.draw()
       
-      # 
+      # Separation due to nearby points (of drawn in lines and walls)
       separationLines = self.separationLines()
       self.acceleration[0] += separationLines[0]
       self.acceleration[1] += separationLines[1]
       
+      # This value is what the interboidal forces (separation, alignment, and cohesion) are multiplied by. Will be a very small value when they need to get away from walls
       interBoidalMultiplier = 1
       if self.objectPriority:
          interBoidalMultiplier = Boid.objectPriorityFactor
-         
+      
+      # Boid's tendency to move away from other boids
       separation = self.separation()
       self.acceleration[0] += separation[0] * interBoidalMultiplier * Boid.separationModifier
       self.acceleration[1] += separation[1] * interBoidalMultiplier * Boid.separationModifier
       
+      # Boid's tendency to face the same way as other boids
       align = self.alignment()
       self.acceleration[0] += align[0] * interBoidalMultiplier * Boid.alignmentModifier
       self.acceleration[1] += align[1] * interBoidalMultiplier * Boid.alignmentModifier
       
+      # Boid's tendency to move towards the center of mass of nearby boids
       cohesion = self.cohesion()
       self.acceleration[0] += cohesion[0] * interBoidalMultiplier * Boid.cohesionModifier
       self.acceleration[1] += cohesion[1] * interBoidalMultiplier * Boid.cohesionModifier
       
-      #self.randomTurn()
+      # Adds a small random turn, makes the boids wiggle to look more like fish. 
+      self.randomTurn()
       
+      # If velocities should be drawn, draw them
       if Boid.velocities:
          self.drawVec()
    
    def getNears(self):
+      """Gets the nearby boids and saves their positions and velocities to a list"""
+      
       # A list of boids in the format [x, y, angle]
       self.nearby = []
       from PositionFormatter import PositionFormatter
@@ -134,6 +142,8 @@ class Boid():
                self.nearby.append([boid.x, boid.y, boid.velocity])
    
    def separationLines(self):
+      """Returns a vector for the boid to accelerate by to move away from nearby POINTS"""
+
       # Object Priority essentially shuts off all senses except object sense. If true, boid will prioritize moving away from walls.
       # This is set to false initially, but will be set to true if boid approaches any points
       self.objectPriority = False
@@ -204,6 +214,7 @@ class Boid():
       return steer  
    
    def separation(self):
+      """Returns a vector for the boid to accelerate by to move away from nearby BOIDS"""
       steer = [0,0]
       total = len(self.nearby)
       avgVector = [0,0]
@@ -234,6 +245,7 @@ class Boid():
       return steer
    
    def alignment(self):
+      """Returns a vector for the Boid to accelerate by to face the same way as nearby boids"""
       steer = [0,0]
       total = len(self.nearby)
       avgVec = [self.velocity[0], self.velocity[1]]
@@ -251,6 +263,7 @@ class Boid():
       return steer
    
    def cohesion(self):
+      """Returns a vector for the boid to accelerate by to move to the center of mass of nearby boids"""
       steer = [0, 0]
       total = len(self.nearby)
       centerOfMass = [self.x, self.y]
@@ -280,11 +293,13 @@ class Boid():
       return steer
    
    def randomTurn(self):
+      "Adds a random turn to the boid's acceleration"
       if random.randrange(10) == 0:
          self.acceleration[0] += (random.randrange(100000)/100000-.5)/2
          self.acceleration[1] += (random.randrange(100000)/100000-.5)/2
    
    def move(self):
+      """"Apply velocity/acceleration to the boid's position/velocity"""
       self.x += self.velocity[0]
       self.y += self.velocity[1]
       self.velocity[0] += self.acceleration[0]
@@ -306,6 +321,7 @@ class Boid():
          self.y = 0
       
    def draw(self):
+      """Draws the boid and some other special indicators if this boid is the main boid, and if Settings calls for the draw"""
       from PositionFormatter import PositionFormatter
       if self == PositionFormatter.boids[0]:
          if Boid.objectSight or Boid.entitySight:

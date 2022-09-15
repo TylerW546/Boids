@@ -22,7 +22,7 @@ background = (30,30,40)
 
 # Pygame initialization
 pygame.font.init()
-myfont = pygame.font.SysFont('Times New Roman', 20)
+myfont = pygame.font.SysFont('Times New Roman', 15)
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH + panelWidth, SCREEN_HEIGHT))
 
@@ -54,6 +54,9 @@ def main():
         Settings.update()
         Settings.writeInfo()
         Environment.update()
+
+        textsurface = myfont.render("Click and drag to draw lines, hold backspace while dragging to box-delete.", False, (0, 0, 0))
+        screen.blit(textsurface,(10, SCREEN_HEIGHT-30))
         
         # Finish Loop
         pygame.display.update()

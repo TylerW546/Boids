@@ -94,16 +94,19 @@ class Settings():
    @staticmethod
    def writeInfo():
       # try try again...
+      # Any error should be ignored, they should not effect the program. Text should stay without breaking anything. 
+      # This assumes the user will usually not type text, and will notice if they do, as I don't want to create an error message text are. 
+      # This would decrease ability to create more settings down the line as it would take up space.
       try:
          Boid.mainSize = int(Settings.textBoxes[0].text)
       except:
          pass
       try:
-         Boid.objectSightRadius = int(Settings.textBoxes[1].text)
+         Boid.sightRadius = int(Settings.textBoxes[1].text)
       except:
          pass
       try:
-         Boid.sightRadius = int(Settings.textBoxes[2].text)
+         Boid.objectSightRadius = int(Settings.textBoxes[2].text)
       except:
          pass
       try:
@@ -130,6 +133,8 @@ class Settings():
          Boid.pointHighlightSize = int(Settings.textBoxes[8].text)
       except:
          pass
+
+      # Set booleans
       Boid.entitySight = Settings.entitySight
       Boid.objectSight = Settings.objectSight
       Boid.centerOfMass = Settings.centerOfMass
