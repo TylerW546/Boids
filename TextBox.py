@@ -4,6 +4,7 @@ from pygame.locals import *
 from main import *
 
 class Text:
+   """Simple class that stores information needed for a pygame text object"""
    font = pygame.font.SysFont('Arial', 10)
    
    def __init__(self, x = SCREEN_WIDTH + 164, y = 20, w = 40, h = 20, color = (0,0,0), text = "Null", font=font):

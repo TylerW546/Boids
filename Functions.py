@@ -1,20 +1,24 @@
 import math
 
 def distance(x1, y1, x2, y2):
+   """Distance between two points"""
    dist = math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2))
    if dist == 0:
       return .001
    return dist
 
 def vectorLen(vec):
+   """Returns the length of the given vector"""
    return distance(vec[0], vec[1], 0, 0)
 
 def vecToLen(vector2, targetDistance):
+   """Scalar multiplies the unit vector of an x,y vector by targetDistance."""
    realDist = distance(0,0,vector2[0], vector2[1])
    fraction = targetDistance / realDist
    return([vector2[0] * fraction, vector2[1] * fraction])
 
 def interceptPoint(lineCoord1, lineCoord2, point, angle):
+   """Finds the intersection point between a line and another line. The second line is defined by an initial point and an angle that the line travels away from that point."""
    dx = lineCoord2[0] - lineCoord1[0]
    dy = lineCoord2[1] - lineCoord1[1]
    if dx == 0:
@@ -37,6 +41,7 @@ def interceptPoint(lineCoord1, lineCoord2, point, angle):
    return [x,y]
 
 def subdivideLine(line, segmentLength):
+   """Returns the points of a line after it has been subdivided by creating points at locations along it. This subdivision ensures that there are no sections of that line greater than a given length."""
    points = []
    points.append(line[0:2])
    
@@ -59,14 +64,9 @@ def subdivideLine(line, segmentLength):
    points.append(line[2:4])
    return points
 
-def pointOnLine(point, lineCoord1, lineCoord2):
-   if point[0] <= max(lineCoord1[0], lineCoord2[0]) and point[0] >= min(lineCoord1[0], lineCoord2[0]):
-      if point[1] <= max(lineCoord1[1], lineCoord2[1]) and point[1] >= min(lineCoord1[1], lineCoord2[1]):
-         return True
-   return False
-
-def pointInCube(point, cubeCorner1, cubeCorner2):
-   if point[0] <= max(cubeCorner1[0], cubeCorner2[0]) and point[0] >= min(cubeCorner1[0], cubeCorner2[0]):
-      if point[1] <= max(cubeCorner1[1], cubeCorner2[1]) and point[1] >= min(cubeCorner1[1], cubeCorner2[1]):
+def pointInSquare(point, squareCorner1, squareCorner2):
+   """Returns whether a point is within the bounds defined by two abitrary square corner positions. Square corners must be opposite corners, but can be in any order."""
+   if point[0] <= max(squareCorner1[0], squareCorner2[0]) and point[0] >= min(squareCorner1[0], squareCorner2[0]):
+      if point[1] <= max(squareCorner1[1], squareCorner2[1]) and point[1] >= min(squareCorner1[1], squareCorner2[1]):
          return True
    return False

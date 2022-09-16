@@ -1,6 +1,7 @@
 from main import *
 
 class PositionFormatter():
+   """Holds the Boid Objects, and creates their initial positions"""
    boids = []
    boidPercent = .0001
    

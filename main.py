@@ -1,6 +1,12 @@
 # -----------------------------------------------------------
-# Description: A Bird-oid (Boid) simulation with a settings panel built using pygame.
-# Date: September 27, 2021
+# Description: A Bird-oid (Boid) simulation with a settings panel built using pygame. 
+# Some information on Boids: Boids are entities that interact with each other based on three separate senses/forces. These senses are separation, cohesion, and alignment.
+# Separation is the tendency to move away from nearby Boids.
+# Cohesion is the tendency to move towards the average center of mass of all nearby boids.
+# Alignment is the tendency to face the same way as nearby Boids.
+# The combination of these three forces (as well as a tendency to avoid objects) makes a cool visual where the Boids look like schools of fish or flocking birds
+#
+# Date Started: September 16, 2021
 # Name: Tyler Weed
 # -----------------------------------------------------------
 
@@ -12,8 +18,10 @@ import time
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
+# Is added onto screen width
 panelWidth = 300
 
+# Define some common colors
 white = (255, 255, 255)
 black = (0,0,0)
 red = (255,0,0)

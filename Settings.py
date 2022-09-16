@@ -11,6 +11,7 @@ class Settings():
    backgroundColor = (100,100,200)
    panelWidth = panelWidth
    
+   
    entitySight = True
    objectSight = True
    centerOfMass = True
@@ -27,6 +28,7 @@ class Settings():
    
    @staticmethod
    def startup():
+      # Set up buttons
       Settings.buttons.append(ToggleButton(y = 20, text="Highlight Boid 0"))
       Settings.buttons.append(ToggleButton(y = 50, text="Entity Sight"))
       Settings.buttons.append(ToggleButton(y = 80, text="Object Sight"))
@@ -37,6 +39,7 @@ class Settings():
       Settings.buttons.append(ToggleButton(y = 230, text="Sub-Line Points"))
       Settings.buttons.append(ToggleButton(y = 260, text="Seen Points"))
       
+      # Set up "Radius:" static texts
       Settings.texts.append(Text(y=20, text="Radius: "))
       Settings.texts.append(Text(y=50, text="Radius: "))
       Settings.texts.append(Text(y=80, text="Radius: "))
@@ -47,6 +50,7 @@ class Settings():
       Settings.texts.append(Text(y=230, text="Radius: "))
       Settings.texts.append(Text(y=260, text="Radius: "))
       
+      # Set up clickable textBoxes
       Settings.textBoxes.append(TextBox(y = 20, text=str(Boid.mainSize)))
       Settings.textBoxes.append(TextBox(y = 50, text=str(Boid.objectSightRadius)))
       Settings.textBoxes.append(TextBox(y = 80, text=str(Boid.sightRadius)))
@@ -59,6 +63,7 @@ class Settings():
    
    @staticmethod
    def handle_event(event):
+      """Sends events to every button and clickable text box"""
       for button in Settings.buttons:
          button.handle_event(event)
       for box in Settings.textBoxes:
@@ -66,6 +71,7 @@ class Settings():
    
    @staticmethod
    def update():
+      """Updates and draws and sets variables based on the user inputs."""
       pygame.draw.rect(screen, Settings.backgroundColor, (SCREEN_WIDTH, 0, Settings.panelWidth, SCREEN_HEIGHT), 0)
       
       mousePos = pygame.mouse.get_pos()
@@ -97,6 +103,7 @@ class Settings():
       # Any error should be ignored, they should not effect the program. Text should stay without breaking anything. 
       # This assumes the user will usually not type text, and will notice if they do, as I don't want to create an error message text are. 
       # This would decrease ability to create more settings down the line as it would take up space.
+      # This transfer of variables from Settings to Boid does two things: it makes it easy to reference the booleans from Boid, and by creating a new variable, it is easier to ignore when the textBox.text contains non-numerical characters
       try:
          Boid.mainSize = int(Settings.textBoxes[0].text)
       except:
