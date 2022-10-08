@@ -64,6 +64,12 @@ def subdivideLine(line, segmentLength):
    points.append(line[2:4])
    return points
 
+def pointOnLine(point, lineCoord1, lineCoord2):
+   if point[0] <= max(lineCoord1[0], lineCoord2[0]) and point[0] >= min(lineCoord1[0], lineCoord2[0]):
+      if point[1] <= max(lineCoord1[1], lineCoord2[1]) and point[1] >= min(lineCoord1[1], lineCoord2[1]):
+         return True
+   return False
+
 def pointInSquare(point, squareCorner1, squareCorner2):
    """Returns whether a point is within the bounds defined by two abitrary square corner positions. Square corners must be opposite corners, but can be in any order."""
    if point[0] <= max(squareCorner1[0], squareCorner2[0]) and point[0] >= min(squareCorner1[0], squareCorner2[0]):

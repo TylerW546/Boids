@@ -3,7 +3,6 @@ from pygame.locals import *
 
 from main import *
 from Buttons import *
-from Sliders import *
 from TextBox import *
 from Boid import Boid
 
@@ -29,15 +28,15 @@ class Settings():
    @staticmethod
    def startup():
       # Set up buttons
-      Settings.buttons.append(ToggleButton(y = 20, text="Highlight Boid 0"))
-      Settings.buttons.append(ToggleButton(y = 50, text="Entity Sight"))
-      Settings.buttons.append(ToggleButton(y = 80, text="Object Sight"))
+      Settings.buttons.append(ToggleButton(y = 20, text="Highlight Boid 0", initialValue=True))
+      Settings.buttons.append(ToggleButton(y = 50, text="Entity Sight", initialValue=True))
+      Settings.buttons.append(ToggleButton(y = 80, text="Object Sight", initialValue=True))
       Settings.buttons.append(ToggleButton(y = 110, text="Center of Mass"))
       Settings.buttons.append(ToggleButton(y = 140, text="Velocities", initialValue=True))
-      Settings.buttons.append(ToggleButton(y = 170, text="Neighbors"))
+      Settings.buttons.append(ToggleButton(y = 170, text="Neighbors", initialValue=True))
       Settings.buttons.append(ToggleButton(y = 200, text="Line Points"))
       Settings.buttons.append(ToggleButton(y = 230, text="Sub-Line Points"))
-      Settings.buttons.append(ToggleButton(y = 260, text="Seen Points"))
+      Settings.buttons.append(ToggleButton(y = 260, text="Seen Points", initialValue=True))
       
       # Set up "Radius:" static texts
       Settings.texts.append(Text(y=20, text="Radius: "))

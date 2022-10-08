@@ -33,6 +33,7 @@ pygame.font.init()
 myfont = pygame.font.SysFont('Times New Roman', 15)
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH + panelWidth, SCREEN_HEIGHT))
+pygame.display.set_caption("Boid Simulation")
 
 from Functions import *
 
@@ -63,8 +64,8 @@ def main():
         Settings.writeInfo()
         Environment.update()
 
-        textsurface = myfont.render("Click and drag to draw lines, hold backspace while dragging to box-delete.", False, (0, 0, 0))
-        screen.blit(textsurface,(10, SCREEN_HEIGHT-30))
+        #textsurface = myfont.render("Click and drag to draw lines, hold backspace while dragging to box-delete.", False, (0, 0, 0))
+        #screen.blit(textsurface,(10, SCREEN_HEIGHT-30))
         
         # Finish Loop
         pygame.display.update()
