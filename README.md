@@ -2,6 +2,6 @@
 Simple Boid simulation using pygame.
 
 ## Requirements
-Python Libraries: pygame
+pygame (python library)
 
 ## Screenshots
